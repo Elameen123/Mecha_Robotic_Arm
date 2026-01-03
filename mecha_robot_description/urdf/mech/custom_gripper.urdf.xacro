@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="custom_gripper" params="parent">
+
+    <link name="seventh_jaw_right_1">
+      <inertial>
+        <origin xyz="-0.0176 0.0029 0.0036" rpy="0 0 0"/>
+        <mass value="0.00142"/>
+        <inertia ixx="0.00001" iyy="0.00001" izz="0.00001" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0.144119 -0.162849 0.137226" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://mecha_robot_description/meshes/mecha_robot/seventh_jaw_right_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0.144119 -0.162849 0.137226" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://mecha_robot_description/meshes/mecha_robot/seventh_jaw_right_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="Revolute_7" type="revolute">
+      <origin xyz="-0.008969 0.00985 0.007318" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="seventh_jaw_right_1"/>
+      <axis xyz="0.3136 -0.1494 0.9377"/>
+      <limit upper="0.261" lower="-0.261" effort="100" velocity="100"/>
+    </joint>
+
+    <link name="seventh_jaw_left_1">
+      <inertial>
+        <origin xyz="-0.0176 0.0029 0.0036" rpy="0 0 0"/>
+        <mass value="0.00142"/>
+        <inertia ixx="0.00001" iyy="0.00001" izz="0.00001" ixy="0" iyz="0" ixz="0"/>
+      </inertial>
+      <visual>
+        <origin xyz="0.142369 -0.139984 0.141455" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://mecha_robot_description/meshes/mecha_robot/seventh_jaw_left_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+        <material name="silver"/>
+      </visual>
+      <collision>
+        <origin xyz="0.142369 -0.139984 0.141455" rpy="0 0 0"/>
+        <geometry>
+          <mesh filename="package://mecha_robot_description/meshes/mecha_robot/seventh_jaw_left_1.stl" scale="0.001 0.001 0.001"/>
+        </geometry>
+      </collision>
+    </link>
+
+    <joint name="Revolute_8" type="revolute">
+      <origin xyz="-0.007219 -0.013015 0.003089" rpy="0 0 0"/>
+      <parent link="${parent}"/>
+      <child link="seventh_jaw_left_1"/>
+      <axis xyz="0.3136 -0.1494 0.9377"/>
+      <limit upper="0.261" lower="-0.261" effort="100" velocity="100"/>
+    </joint>
+
+  <gazebo reference="seventh_jaw_right_1">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+    <gazebo reference="seventh_jaw_left_1">
+        <material>Gazebo/Black</material>
+    </gazebo>
+
+  </xacro:macro>
+</robot>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="New_Robotic_Arm">
+
+    <xacro:arg name="prefix" default=""/>
+    <xacro:arg name="add_world" default="true"/>
+    <xacro:arg name="use_gripper" default="true"/>
+
+    <xacro:if value="$(arg add_world)">
+        <link name="world"/>
+        <joint name="$(arg prefix)virtual_joint" type="fixed">
+            <parent link="world"/>
+            <child link="$(arg prefix)base_link"/>
+            <origin xyz="0 0 0" rpy="0 0 0"/> 
+        </joint>
+    </xacro:if>
+
+    <xacro:include filename="$(find mecha_robot_description)/urdf/mech/custom_arm.urdf.xacro"/>
+    <xacro:custom_arm prefix="$(arg prefix)"/>
+
+    <xacro:if value="$(arg use_gripper)">
+        <xacro:include filename="$(find mecha_robot_description)/urdf/mech/custom_gripper.urdf.xacro"/>
+        <xacro:custom_gripper parent="$(arg prefix)sixth_jaw_1"/>
+    </xacro:if>
+
+    <xacro:include filename="$(find mecha_robot_description)/urdf/control/custom_robot_ros2_control.urdf.xacro" />
+    <xacro:custom_robot_ros2_control prefix="$(arg prefix)"/>
+
+    <xacro:include filename="$(find mecha_robot_description)/urdf/control/gazebo_sim_ros2_control.urdf.xacro" />
+    <xacro:gazebo_sim_ros2_control_plugin />
+
+</robot>

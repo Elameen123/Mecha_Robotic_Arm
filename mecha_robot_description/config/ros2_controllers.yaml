@@ -1,0 +1,48 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+    
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    
+    gripper_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+# -----------------------------------------------------------------------------
+# ARM CONTROLLER (Joints 1-6)
+# -----------------------------------------------------------------------------
+arm_controller:
+  ros__parameters:
+    joints:
+      - joint1
+      - joint2
+      - joint3
+      - joint4
+      - joint5
+      - joint6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    open_loop_control: false
+    allow_partial_joints_goal: false
+
+# -----------------------------------------------------------------------------
+# GRIPPER CONTROLLER (Joint 7 - The Fingers)
+# -----------------------------------------------------------------------------
+gripper_controller:
+  ros__parameters:
+    joints:
+      - Revolute_7
+      # We usually only control the main finger, and the mimic joint follows automatically
+      # But for simplicity in simulation, we can list the driver joint here.
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+      - velocity
+    allow_partial_joints_goal: false
