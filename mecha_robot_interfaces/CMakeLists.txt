@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(mecha_robot_system_tests)
+project(mecha_robot_interfaces)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,19 +7,14 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(moveit_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(sensor_msgs REQUIRED)
+find_package(rclcpp REQUIRED)
 
-#Copy necessary files to designated locations in the project
-install(
-DIRECTORY scripts src
-DESTINATION share/${PROJECT_NAME}
-)
-#Python Executable
-install (PROGRAMS
-	scripts/arm_gripper_pick_and_place.py
-	DESTINATION lib/${PROJECT_NAME}
+rosidl_generate_interfaces(${PROJECT_NAME}
+ "srv/GetPlanningScene.srv"
+  DEPENDENCIES moveit_msgs sensor_msgs
 )
 
 if(BUILD_TESTING)
