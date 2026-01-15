@@ -31,7 +31,7 @@ def generate_launch_description():
     )
 
     # 4. URDF
-    urdf_file = os.path.join(pkg_description, 'urdf', 'robots', 'custom_robot.urdf.xacro')
+    urdf_file = os.path.join(pkg_description, 'urdf', 'robots', 'mycobot_280.urdf.xacro')
     robot_desc = Command(['xacro ', urdf_file])
 
     # 5. Robot State Publisher

@@ -4,7 +4,7 @@
   <name>mecha_robot_mtc_pick_place_demo</name>
   <version>0.0.0</version>
   <description>Pick and place demo using the MoveIt Task Constructor for motion planning and the Point Cloud Library for perception.</description>
-  <maintainer email="lanre.mohammed23@gmail.com">mohammed-blazers</maintainer>
+  <maintainer email="automaticaddison@todo.com">ubuntu</maintainer>
   <license>BSD-3-Clause</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
@@ -17,6 +17,7 @@
   <depend>moveit_ros_planning_interface</depend>
   <depend>moveit_task_constructor_core</depend>
   <depend>moveit_task_constructor_msgs</depend>
+  <depend>mecha_robot_interfaces</depend>
   <depend>pcl_conversions</depend>
   <depend>pcl_ros</depend>
   <depend>rclcpp</depend>
