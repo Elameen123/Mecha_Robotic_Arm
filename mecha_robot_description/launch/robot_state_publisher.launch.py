@@ -74,7 +74,7 @@ def process_ros2_controllers_config(context):
 
 # Define the arguments for the XACRO file
 ARGUMENTS = [
-    DeclareLaunchArgument('robot_name', default_value='mycobot_280',
+    DeclareLaunchArgument('robot_name', default_value='mecha_robot,
                           description='Name of the robot'),
     DeclareLaunchArgument('prefix', default_value='',
                           description='Prefix for robot joints and links'),
@@ -115,8 +115,8 @@ def generate_launch_description():
     """
     # Define filenames
     urdf_package = 'mecha_robot_description'
-    urdf_filename = 'mycobot_280.urdf.xacro'
-    rviz_config_filename = 'mycobot_280_description.rviz'
+    urdf_filename = 'custom_robot_urdf.xacro'
+    rviz_config_filename = 'mecha_robot_description.rviz'
 
     # Set paths to important files
     pkg_share_description = FindPackageShare(urdf_package)

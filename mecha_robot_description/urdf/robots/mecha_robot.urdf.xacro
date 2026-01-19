@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<robot name="mecha_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:include filename="$(find mecha_robot_description)/urdf/mech/materials.xacro"/>
+  <xacro:include filename="$(find mecha_robot_description)/urdf/mech/macros.xacro"/>
+
+  <xacro:m_link_mesh name="base_link" meshfile="BASE.stl" v_xyz="0 0 0.035" material="silver"/>
+
+  <xacro:m_joint name="joint_1" type="revolute" axis="0 0 1" 
+                 parent="base_link" child="elbow_unit_1" 
+                 origin_xyz="0 0 0.005" origin_rpy="0 0 0"/>
+
+  <link name="elbow_unit_1">
+    <visual> <geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/ELBOW_1.stl" scale="0.001 0.001 0.001"/></geometry><material name="silver"/></visual>
+    <visual> <geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/ELBOW_2.stl" scale="0.001 0.001 0.001"/></geometry><material name="silver"/></visual>
+  </link>
+
+  <joint name="pipe_1_fixed" type="fixed">
+    <parent link="elbow_unit_1"/><child link="pipe_link_1"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/> </joint>
+  <xacro:m_link_mesh name="pipe_link_1" meshfile="PIPE_LINK_1.stl" v_xyz="0 0 0" material="silver"/>
+
+  <xacro:m_joint name="joint_2" type="revolute" axis="0 1 0" 
+                 parent="pipe_link_1" child="elbow_unit_2" 
+                 origin_xyz="0 0 0" origin_rpy="0 0 0"/>
+
+  <link name="elbow_unit_2">
+    <visual> <geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/ELBOW_3.stl" scale="0.001 0.001 0.001"/></geometry><material name="silver"/></visual>
+    <visual> <geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/ELBOW_4.stl" scale="0.001 0.001 0.001"/></geometry><material name="silver"/></visual>
+  </link>
+
+  <joint name="pipe_2_fixed" type="fixed">
+    <parent link="elbow_unit_2"/><child link="pipe_link_2"/>
+    <origin xyz="0 0 0.005" rpy="0 0 0"/>
+  </joint>
+  <xacro:m_link_mesh name="pipe_link_2" meshfile="PIPE_LINK_2.stl" v_xyz="0 0 0" material="silver"/>
+
+  <xacro:m_joint name="joint_3" type="revolute" axis="0 1 0" 
+                 parent="pipe_link_2" child="elbow_unit_3" 
+                 origin_xyz="0 0 0.005" origin_rpy="0 0 0"/>
+
+  <link name="elbow_unit_3">
+    <visual> <geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/ELBOW_5.stl" scale="0.001 0.001 0.001"/></geometry><material name="silver"/></visual>
+    <visual> <geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/ELBOW_6.stl" scale="0.001 0.001 0.001"/></geometry><material name="silver"/></visual>
+  </link>
+
+  <xacro:m_joint name="joint_6" type="revolute" axis="0 1 0" 
+                 parent="elbow_unit_3" child="connector" 
+                 origin_xyz="0 0 0.005" origin_rpy="0 0 0"/>
+
+  <xacro:m_link_mesh name="connector" meshfile="END_EFFECTOR_CONNECTOR.stl" v_xyz="0 0 0.0" material="silver"/>
+
+  <joint name="gripper_joint" type="fixed">
+    <parent link="connector"/><child link="gripper"/>
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+  </joint>
+  <xacro:m_link_mesh name="gripper" meshfile="END_EFFECTOR_GRIPPER.stl" v_xyz="0 0 0" material="silver"/>
+
+</robot>

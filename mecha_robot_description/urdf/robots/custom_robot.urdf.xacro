@@ -25,7 +25,7 @@
     <xacro:include filename="$(find mecha_robot_description)/urdf/control/custom_robot_ros2_control.urdf.xacro" />
     <xacro:custom_robot_ros2_control prefix="$(arg prefix)"/>
 
-    <xacro:include filename="$(find mecha_robot_description)/urdf/control/gazebo_sim_ros2_control.urdf.xacro" />
-    <xacro:gazebo_sim_ros2_control_plugin />
+    <!-- <xacro:include filename="$(find mecha_robot_description)/urdf/control/gazebo_sim_ros2_control.urdf.xacro" />
+    <xacro:gazebo_sim_ros2_control_plugin /> -->
 
 </robot>

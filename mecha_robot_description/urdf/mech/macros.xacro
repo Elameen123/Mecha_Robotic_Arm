@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="m_link_mesh" params="name meshfile v_xyz:='0 0 0' v_rpy:='0 0 0' material:='silver'">
+    <link name="${name}">
+      <visual>
+        <origin xyz="${v_xyz}" rpy="${v_rpy}"/>
+        <geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/${meshfile}" scale="0.001 0.001 0.001"/></geometry>
+        <material name="${material}"/>
+      </visual>
+      <collision>
+        <origin xyz="${v_xyz}" rpy="${v_rpy}"/><geometry><mesh filename="package://mecha_robot_description/meshes/Mecha_Robot_models/${meshfile}" scale="0.001 0.001 0.001"/></geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="m_joint" params="name type axis parent child origin_xyz origin_rpy">
+    <joint name="${name}" type="${type}">
+      <axis xyz="${axis}"/><parent link="${parent}"/><child link="${child}"/><origin rpy="${origin_rpy}" xyz="${origin_xyz}"/>
+      <limit effort="100.0" lower="-3.1415" upper="3.1415" velocity="1.5"/>
+    </joint>
+  </xacro:macro>
+
+</robot>

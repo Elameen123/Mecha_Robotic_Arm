@@ -4,25 +4,127 @@
 <xacro:include filename="$(find GROUP_description)/urdf/materials.xacro" />
 <xacro:include filename="$(find GROUP_description)/urdf/GROUP.ros2control" />
 <xacro:include filename="$(find GROUP_description)/urdf/GROUP.gazebo" />
+
 <link name="base_link">
-  <inertial>
-    <origin xyz="-0.0021251885363257157 -5.155240066430618e-17 0.028859837347801526" rpy="0 0 0"/>
-    <mass value="0.6924540193004777"/>
-    <inertia ixx="0.001054" iyy="0.000982" izz="0.001495" ixy="-0.0" iyz="0.0" ixz="-2e-05"/>
-  </inertial>
   <visual>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find GROUP_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
+    <origin xyz="0 0 0.035" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/></geometry>
     <material name="silver"/>
   </visual>
-  <collision>
-    <origin xyz="0 0 0" rpy="0 0 0"/>
-    <geometry>
-      <mesh filename="file://$(find GROUP_description)/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
-    </geometry>
-  </collision>
+</link>
+
+<joint name="joint_1" type="revolute">
+  <origin xyz="0 0 0.005" rpy="0 0 0"/> <parent link="base_link"/><child link="link_1"/><axis xyz="0 0 1"/>
+  <limit lower="-3.14" upper="3.14" effort="10" velocity="1.0"/>
+</joint>
+
+<link name="link_1">
+  <visual> <origin xyz="0 0 0.0312" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/ELBOW_1_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+  <visual> <origin xyz="0 0 0.0312" rpy="0 0 3.14159"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/ELBOW_2_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+  <visual> <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/SERVO_GUARD_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="black"/>
+  </visual>
+</link>
+
+<joint name="joint_2" type="revolute">
+  <origin xyz="0 0 0.0624" rpy="0 0 0"/> <parent link="link_1"/><child link="link_2"/><axis xyz="0 1 0"/>
+  <limit lower="-1.57" upper="1.57" effort="10" velocity="1.0"/>
+</joint>
+
+<link name="link_2">
+  <visual>
+    <origin xyz="0 0 0.0688" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/PIPE_LINK_1_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+</link>
+
+<joint name="joint_3" type="revolute">
+  <origin xyz="0 0 0.1376" rpy="0 0 0"/> <parent link="link_2"/><child link="link_3"/><axis xyz="0 1 0"/>
+  <limit lower="-1.57" upper="1.57" effort="10" velocity="1.0"/>
+</joint>
+
+<link name="link_3">
+  <visual> <origin xyz="0 0 0.0312" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/ELBOW_3_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+  <visual> <origin xyz="0 0 0.0312" rpy="0 0 3.14159"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/ELBOW_4_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+  <visual> <geometry><mesh filename="file://$(find GROUP_description)/meshes/SERVO_GUARD_2.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="black"/>
+  </visual>
+</link>
+
+<joint name="joint_4" type="revolute">
+  <origin xyz="0 0 0.0624" rpy="0 0 0"/>
+  <parent link="link_3"/><child link="link_4"/><axis xyz="0 1 0"/>
+  <limit lower="-1.57" upper="1.57" effort="10" velocity="1.0"/>
+</joint>
+
+<link name="link_4">
+  <visual>
+    <origin xyz="0 0 0.0688" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/PIPE_LINK_2_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+</link>
+
+<joint name="joint_5" type="revolute">
+  <origin xyz="0 0 0.1376" rpy="0 0 0"/>
+  <parent link="link_4"/><child link="link_5"/><axis xyz="0 0 1"/>
+  <limit lower="-3.14" upper="3.14" effort="10" velocity="1.0"/>
+</joint>
+
+<link name="link_5">
+  <visual> <origin xyz="0 0 0.0312" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/ELBOW_5_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+  <visual> <origin xyz="0 0 0.0312" rpy="0 0 3.14159"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/ELBOW_6_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+  <visual> <geometry><mesh filename="file://$(find GROUP_description)/meshes/SERVO_GUARD_3.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="black"/>
+  </visual>
+</link>
+
+<joint name="joint_6" type="revolute">
+  <origin xyz="0 0 0.0624" rpy="0 0 0"/>
+  <parent link="link_5"/><child link="link_6"/><axis xyz="1 0 0"/>
+  <limit lower="-3.14" upper="3.14" effort="10" velocity="1.0"/>
+</joint>
+
+<link name="link_6">
+  <visual>
+    <origin xyz="0 0 0.01" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/END_EFFECTOR_CONNECTOR_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
+</link>
+
+<joint name="gripper_joint" type="prismatic">
+  <origin xyz="0 0 0.02" rpy="0 0 0"/>
+  <parent link="link_6"/><child link="gripper_link"/><axis xyz="0 1 0"/>
+  <limit lower="0" upper="0.04" effort="10" velocity="0.1"/>
+</joint>
+
+<link name="gripper_link">
+  <visual>
+    <origin xyz="0 0 0.01" rpy="0 0 0"/>
+    <geometry><mesh filename="file://$(find GROUP_description)/meshes/END_EFFECTOR_GRIPPER_1.stl" scale="0.001 0.001 0.001"/></geometry>
+    <material name="silver"/>
+  </visual>
 </link>
 
 </robot>
